@@ -1,0 +1,23 @@
+{
+  "name": "quickdate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start" : "index.js"
+  },
+  "author": "MC",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.1",
+    "socket.io": "^1.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IM-MC/QuikDate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IM-MC/QuikDate/issues"
+  },
+  "homepage": "https://github.com/IM-MC/QuikDate#readme",
+  "description": ""
+}
