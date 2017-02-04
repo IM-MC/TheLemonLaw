@@ -39,6 +39,9 @@ const server = express()
 
 const io = socketIO(server);
 
+io.set('transports', ['xhr-polling']);
+io.set('polling duration', 10);
+
 io.on('connection', (socket) => {
   socket.on('chat message', function(msg){
   	io.emit('chat message', msg);
