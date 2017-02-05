@@ -10,14 +10,19 @@ body {
 }
 
 
-.chatform {
-	width:700px;
-	margin: 0 auto;
-	background-color: white;
-	text-align: center;
+#chatform {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+
 }
 
-#form {
+.text{
 	text-align: center;
 	font-weight: 700;
 	font-size: 2.5rem;
@@ -32,7 +37,9 @@ body {
 			opacity: 0.4;
 		}
 	}
+
 }
+
 
 .chatscreen{
 	display:none;
