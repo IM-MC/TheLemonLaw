@@ -1,53 +1,59 @@
-// var app = require('express')();
-// var http = require('http').Server(app);
-// var io = require('socket.io')(http);
+// 'use strict';
 
-// app.get('/',function(req,res){
-// 	res.sendfile(__dirname + '/main_page.html');
+// const express = require('express');
+// const socketIO = require('socket.io');
+// const path = require('path');
+
+// const PORT = process.env.PORT || 3000;
+// const INDEX = path.join(__dirname, 'main_page.html');
+
+// const server = express()
+//   .use((req, res) => res.sendFile(INDEX) )
+//   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+// const io = socketIO(server);
+
+
+// io.on('connection', (socket) => {
+//   socket.on('chat message', function(msg){
+//   	io.emit('chat message', msg);
+//   });
 // });
 
-// io.on('connection', function(socket){
-// 	console.log('User has been connected');
-// 	socket.broadcast.emit('A new user has been connected');
-// 	socket.on('chat message', function(msg){
-// 		io.emit('chat message', msg);
-// 	});
-// 	socket.on('disconnect',function(){
-// 		console.log('User disconnected');
-// 	});
-// });
 
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var PORT = process.env.PORT || 8080;
 
-// http.listen(8080, function(){
-// 	console.log('listening on *:808');
-// });
-
-
-
-'use strict';
-
-const express = require('express');
-const socketIO = require('socket.io');
-const path = require('path');
-
-const PORT = process.env.PORT || 3000;
-const INDEX = path.join(__dirname, 'main_page.html');
-
-const server = express()
-  .use((req, res) => res.sendFile(INDEX) )
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-
-const io = socketIO(server);
-
-io.set('transports', ['xhr-polling']);
-io.set('polling duration', 10);
-
-io.on('connection', (socket) => {
-  socket.on('chat message', function(msg){
-  	io.emit('chat message', msg);
-  });
+app.get('/',function(req,res){
+	res.sendFile(__dirname + '/main_page.html');
 });
 
+io.on('connection',function(socket){
+	console.log(socket.id);
 
+	var room = 'room 1';
 
-//setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
+	socket.join(room);
+
+	socket.on('message',function(msg){
+		io.sockets.in(room).emit('message',msg,socket.id);
+	});
+
+	socket.on('disconnect',function(){
+		console.log("User disconnected",socket.id);
+	});
+
+	socket.on('change channel',function(newChannel){
+		socket.leave(channel);
+		socket.join(newChannel);
+		room = newChannel;
+		socket.emit('change channel',newChannel);
+	});
+
+});
+
+http.listen(PORT,function(){
+	console.log('Listening on port: ',PORT);
+});
