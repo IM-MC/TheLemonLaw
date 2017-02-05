@@ -46,8 +46,8 @@
 			room = data.room;
 			state = 2
             document.body.innerHTML = '<input type="text" id="message">\
-            <button type="button" name="button" onclick="sendMessage()">Send</button><button type="button" name="disconnect" onclick="disconnect()">Disconnect</button>\
-            <div id="message-container"></div>';	// replace with input tag
+            <div id="send"><button id="buttonSend" type="button" name="button" onclick="sendMessage()">Send</button></div> <div id="disconnect"><button id="buttonDisconnect" type="button" name="disconnect" onclick="disconnect()">Disconnect</button></div>\
+            <div id="message-container"></div> <div class="logo"><a href="about.html"><img src="TheLemonLaw.png"/></a></div>';	// replace with input tag
 			document.getElementById('message-container').innerHTML += '<div> Your room is ' + room + '</div>';
 			/*
 			socket.on('connectToRoom',function(data){
