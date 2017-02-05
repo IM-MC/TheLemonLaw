@@ -77,15 +77,16 @@
                 document.getElementById('message-container').innerHTML += '<div><b>' + data.name + '</b>: ' + data.message + '</div>';
             }
         })
-		
+
 		socket.on('quit',function(data){
 			disconnect();
 		});
 		function reset(){
-			document.body.innerHTML = login;
-			state = 1;
+			//document.body.innerHTML = login;
+			//state = 1;
+      window.location.reload();
 		}
-		
+
 		function handleKeyPress(e){
 		var key= e.which;
 			if (key==13){
