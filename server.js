@@ -40,24 +40,24 @@ io.on('connection', function(socket){
 			//choose base on gender
 			
 			if (data.gender == "Male"){
-				roomNum = Math.floor((Math.random() * 10) + 1);
+				roomNum = Math.floor((Math.random() * 5) + 1);
 			}
 			else if(data.gender == "Female"){
 				roomNum = Math.floor((Math.random() * 5)+1)*2;
 			}
 			// chooose base on age
 			if  (data.age < 18 ){
-				roomNum = Math.floor((Math.random() * 3)+1);
+				roomNum = Math.floor((Math.random() * 2)+1);
 			}
 			else {
-				roomNum = Math.floor((Math.random() * 10)+4);
+				roomNum = Math.floor((Math.random() * 2)+4);
 			}
 			
 			// join room after user name is set
 			while (io.nsps['/'].adapter.rooms["room-"+roomNum] && io.nsps['/'].adapter.rooms["room-"+roomNum].length > 1){
 								// choose base on gender
 				if (data.gender == "Male"){
-					roomNum = Math.floor((Math.random() * 10) + 1);
+					roomNum = Math.floor((Math.random() * 5) + 1);
 				}
 				else if(data.gender == "Female"){
 					roomNum = Math.floor((Math.random() * 5)+1)*2;
@@ -65,10 +65,10 @@ io.on('connection', function(socket){
 				
 				// chooose base on age
 				if  (data.age < 18 ){
-					roomNum = Math.floor((Math.random() * 3)+1);
+					roomNum = Math.floor((Math.random() * 2)+1);
 				}
 				else {
-					roomNum = Math.floor((Math.random() * 10)+4);
+					roomNum = Math.floor((Math.random() * 2)+4);
 				}
 			}
 				
@@ -100,7 +100,7 @@ io.on('connection', function(socket){
 		
 			//If room is full start timer
 			
-			if (io.nsps['/'].adapter.rooms["room-"+roomNum].length > 1 ){ //if length is 2
+			if (io.nsps['/'].adapter.rooms["room-"+roomNum].length == 2 ){ //if length is 2
 				
 				var index=[];
 				var temp = 0;
