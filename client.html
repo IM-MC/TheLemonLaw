@@ -20,6 +20,7 @@
 		var name;
 		var age;
 		var gender;
+		var state = 1;
 		var login = '<div id="error-container" ></div><div style="text-align:center"><ul style="list-style-type: none;" ><li><input id="name" type="text" name="name" value="" placeholder="Enter your Name!" ></li><li><input id="age" type="text" name="age" value="" placeholder="Enter your Age!" ></li><li><input id="gender" type="text" name="gender" value="" placeholder="Enter your Gender!" ></li></ul><button type="button" name="button" onclick="setUser()">Start chating!</button></div>'
 
 
@@ -43,7 +44,7 @@
             //user = data.username; /*set user to data.user name*/
             name = data.name; /*set user to data.user name*/
 			room = data.room;
-
+			state = 2
             document.body.innerHTML = '<input type="text" id="message">\
             <button type="button" name="button" onclick="sendMessage()">Send</button><button type="button" name="disconnect" onclick="disconnect()">Disconnect</button>\
             <div id="message-container"></div>';	// replace with input tag
@@ -76,12 +77,27 @@
                 document.getElementById('message-container').innerHTML += '<div><b>' + data.name + '</b>: ' + data.message + '</div>';
             }
         })
+		
+		socket.on('quit',function(data){
+			disconnect();
+		});
 		function reset(){
 			document.body.innerHTML = login;
+			state = 1;
+		}
+		
+		function handleKeyPress(e){
+		var key= e.which;
+			if (key==13){
+				if (state == 1)
+					setUser();
+				else (state == 2)
+					sendMessage();
+			}
 		}
     </script>
 
-<body>
+<body onkeypress="handleKeyPress(event)">
 
   <div class="home">
     <h2><a href="main_page.html"><i class="fa fa-home" ></i></a></h2>

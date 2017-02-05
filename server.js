@@ -37,6 +37,13 @@ io.on('connection', function(socket){
 
 
 			
+			// Start timer
+			if (io.nsps['/'].adapter.rooms["room-"+roomNum].length == 2){
+				setTimeout(function(){
+					socket.emit('quit','Timer expired');
+				},
+				10000);
+			}
 			//socket.emit('userSet', {username: data});	// username = descrpition
 			socket.emit('userSet', {name: data.name ,age:data.age , gender:data.gender, room: roomNum});	// username = descrpition
 			
