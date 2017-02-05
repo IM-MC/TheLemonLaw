@@ -1,0 +1,171 @@
+@import 'https://fonts.googleapis.com/css?family=Alegreya+Sans';
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+/*over all styling of the html file*/
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  background-color: #CBE32D;
+}
+
+ul{
+  list-style-type: none;
+  margin: auto;
+
+}
+
+section{
+  height: 100%;
+  width: 100%;
+}
+
+.title{
+  cursor: default;
+  position: relative;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 15%;
+  padding-bottom: 25%;
+  width: 500px;
+  height: 100px;
+  color: white;
+  font-size: 250%;
+  text-align: center;
+  font-family: 'VT323', monospace;
+}
+
+.home{
+  position: absolute;;
+  margin: auto;
+  top: 0;
+  right: 89%;
+  bottom: 85%;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.home i{
+  font-size:175%;
+	color: white;
+}
+
+.home i:hover{
+  color: #4CAF50;
+}
+
+#matthew{
+  margin: auto;
+  background-color: #A8CD1B;
+  min-height: 95vh;
+  width: 90%;
+  margin-top: 100px;
+}
+
+.mh{
+  position: absolute;;
+  margin: auto;
+  font-size: 250%;
+  top: 155%;
+  right: 0;
+  bottom: 0;
+  left: 6%;
+  width: 400px;
+  height: 300px;
+  color: white;
+  font-family: 'VT323', monospace;
+}
+
+.mp{
+  background-color: #CBE32D;
+  position: absolute;;
+  margin: auto;
+  font-size: 250%;
+  top: 220%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  height: 70%;
+
+}
+
+#peter{
+  margin: auto;
+  background-color: #A8CD1B;
+  min-height: 95vh;
+  width: 90%;
+  margin-top: 100px;
+}
+
+.ph{
+  position: absolute;;
+  margin: auto;
+  font-size: 250%;
+  top: 372%;
+  right: 0;
+  bottom: 0;
+  left: 12%;
+  width: 400px;
+  height: 300px;
+  color: white;
+  font-family: 'VT323', monospace;
+}
+
+.pp{
+  background-color: #CBE32D;
+  position: absolute;;
+  margin: auto;
+  font-size: 250%;
+  top: 438%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  height: 70%;
+
+}
+
+#alvin{
+  margin: auto;
+  background-color: #A8CD1B;
+  min-height: 95vh;
+  width: 90%;
+  margin-top: 100px;
+  margin-bottom: 70px;
+}
+
+.ah{
+  position: absolute;;
+  margin: auto;
+  font-size: 250%;
+  top: 590%;
+  right: 0;
+  bottom: 0;
+  left: 9%;
+  width: 400px;
+  height: 300px;
+  color: white;
+  font-family: 'VT323', monospace;
+}
+
+.ap{
+  background-color: #CBE32D;
+  position: absolute;;
+  margin: auto;
+  font-size: 250%;
+  top: 657%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 80%;
+  height: 70%;
+
+}
