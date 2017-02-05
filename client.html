@@ -22,25 +22,26 @@
 		var age;
 		var gender;
 		var state = 1;
+		var user;
+		var room;
 		var login = '<div id="error-container" ></div><div style="text-align:center"><ul style="list-style-type: none;" ><li><input id="name" type="text" name="name" value="" placeholder="Enter your Name!" ></li><li><input id="age" type="text" name="age" value="" placeholder="Enter your Age!" ></li><li><input id="gender" type="text" name="gender" value="" placeholder="Enter your Gender!" ></li></ul><button type="button" name="button" onclick="setUser()">Start chating!</button></div>'
 
 
         function setUser(){	// set username event listener
 			name = document.getElementById('name').value;
-			if(name.length < 3){
+			if(name.length < 5){
 				alert("Please enter a valid name!");
 				return;
 			}
 			age = document.getElementById('age').value;
 			gender = document.getElementById('gender').value;
-            socket.emit('setUser', {name:name , age:age, gender:gender}); //send user name to server
+            socket.emit('setUser', {name:name , age:age, gender:gender,room:0}); //send user name to server
         };
 		function disconnect(){
-			socket.emit('leftRoom', {name: name, room: room});
+			socket.emit('leftRoom', {name: name, room: room });
 			reset();
 		}
-        var user;
-		var room;
+
         socket.on('userExists', function(data){// if server says user name exists
 			errorMsg = 'Error: ' + data;
             document.getElementById('error-container').innerHTML = errorMsg;
@@ -73,23 +74,16 @@
 			socket.emit('msg', {message: msg, name: name, room: room});
 		}
         socket.on('newmsg', function(data){
-			if(data.message === "disconnected"){
 				document.getElementById('message-container').innerHTML += '<div><b>' + data.name + '</b>: ' + data.message + '</div>';
-
-			}
-            else if(name){
-				// add new line for new message
-                document.getElementById('message-container').innerHTML += '<div><b>' + data.name + '</b>: ' + data.message + '</div>';
-            }
         })
 
-		socket.on('quit',function(data){
+		socket.on('quit',function(){
 			disconnect();
 		});
 		function reset(){
-			//document.body.innerHTML = login;
-			//state = 1;
-      window.location.reload();
+		//	document.body.innerHTML = login;
+		//	state = 1;
+     window.location.reload();
 		}
 
 		function handleKeyPress(e){
@@ -101,6 +95,15 @@
 					sendMessage();
 			}
 		}
+		/*
+		socket.on('kicked',function(data){
+			socket.emit('forceLeave',{name: name, room: room});
+			reset();
+		});
+		function kick(){
+			socket.emit('kick',{name:name , age:age, gender:gender,room:room});
+		};
+		*/
     </script>
 
 <body onkeypress="handleKeyPress(event)">
