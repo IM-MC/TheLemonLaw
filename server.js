@@ -9,7 +9,11 @@ app.use(express.static(__dirname));
 
 
 app.get('/',function(req,res){
-	res.sendFile(__dirname + '/client.html');
+	res.sendFile(__dirname + '/main_page.html');
+});
+
+app.get('/create', function(req,res){
+	res.redirect('/client.html');
 });
 users = [];
 
