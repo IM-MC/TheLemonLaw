@@ -1,7 +1,11 @@
-var app = require('express')();
+var express = require('express');
+
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var PORT = process.env.PORT || 8080;
+
+app.use(express.static(__dirname));
 
 
 app.get('/',function(req,res){
@@ -26,6 +30,8 @@ io.on('connection', function(socket){
 				roomNum = Math.round((Math.random()* 10));
 			}
 			socket.join("room-"+roomNum);
+
+
 			
 			//socket.emit('userSet', {username: data});	// username = descrpition
 			socket.emit('userSet', {name: data.name ,age:data.age , gender:data.gender, room: roomNum});	// username = descrpition
