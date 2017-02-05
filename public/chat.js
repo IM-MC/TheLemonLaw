@@ -1,4 +1,4 @@
-
+$(function(){
 	var socket = io();
 		var el = document.getElementById('server-time');
 		
@@ -18,7 +18,6 @@
 			age = document.getElementById('age').value;
 			gender = document.getElementById('gender').value;
             socket.emit('setUser', {name:name , age:age, gender:gender}); //send user name to server
-            console.log("hello");
         };
 		function disconnect(){
 			socket.emit('leftRoom', {name: name, room: room});	
@@ -69,7 +68,6 @@
         })
 		function reset(){
 			document.body.innerHTML = login;
-		}
-
-
+		}}
+)};
 

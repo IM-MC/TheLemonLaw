@@ -78,19 +78,23 @@
 		function reset(){
 			document.body.innerHTML = login;
 		}
-
     </script>
+    
     <body>
-    <h1 class = "text"> THE LEMON LAW </h1>
+    <div class="logo">
+  		<img src="TheLemonLaw.png"/>
+	</div>
+
         <div id="error-container" ></div>
 		<div style="text-align:center">
 		<ul style="list-style-type: none;" >
-			<li><input id="name" type="text" name="name" value="" placeholder="Enter your Name!" ></li>
+			<li><input  class="usernameInput" id="name" type="text" name="name" value="" maxlength="14" placeholder="Enter your Name!" ></li>
 			<li><input id="age" type="text" name="age" value="" placeholder="Enter your Age!" ></li>
 			<li><input id="gender" type="text" name="gender" value="" placeholder="Enter your Gender!" ></li>
 		</ul>
-        <button type="button" name="button" onclick="setUser()">Start chating!</button>
+        <button type="button" name="button" onclick="setUser()">Start chatting!</button>
 		</div>
+		<script type="text/javascript" src="/public/chat.js"></script>
 		
 
     </body>
