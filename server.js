@@ -40,7 +40,7 @@ io.on('connection', function(socket){
 			//choose base on gender
 			
 			if (data.gender == "Male"){
-				roomNum = Math.floor((Math.random() * 10) + 1);
+				roomNum = Math.floor((Math.random() * 5) + 1);
 			}
 			else if(data.gender == "Female"){
 				roomNum = Math.floor((Math.random() * 5)+1)*2;
@@ -57,7 +57,7 @@ io.on('connection', function(socket){
 			while (io.nsps['/'].adapter.rooms["room-"+roomNum] && io.nsps['/'].adapter.rooms["room-"+roomNum].length > 1){
 								// choose base on gender
 				if (data.gender == "Male"){
-					roomNum = Math.floor((Math.random() * 10) + 1);
+					roomNum = Math.floor((Math.random() * 5) + 1);
 				}
 				else if(data.gender == "Female"){
 					roomNum = Math.floor((Math.random() * 5)+1)*2;
