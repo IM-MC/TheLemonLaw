@@ -1,6 +1,10 @@
 @import 'https://fonts.googleapis.com/css?family=Alegreya+Sans';
 @import url('https://fonts.googleapis.com/css?family=VT323');
 
+*:focus{
+	outline: none;
+}
+
 /*over all styling of the html file*/
 html {
   height: 100%;

@@ -1,6 +1,10 @@
 @import 'https://fonts.googleapis.com/css?family=Alegreya+Sans';
 @import url('https://fonts.googleapis.com/css?family=VT323');
 
+*:focus{
+	outline: none;
+}
+
 /*over all styling of the html file*/
 html {
   height: 100%;
@@ -44,7 +48,7 @@ section{
 .start-button{
   position: absolute;
   margin: auto;
-  top: 25%;
+  top: 13%;
   right: 0;
   bottom: 0;
   left: 0;
@@ -75,6 +79,11 @@ section{
   border: 4px solid #4CAF50;
 }
 
+#start-button-style:active{
+  background-color: white;
+  color: #4CAF50;
+  border: 4px solid white;
+}
 /*style of the footer, about us and contact us*/
 
 footer{

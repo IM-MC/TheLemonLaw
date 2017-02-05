@@ -3,49 +3,49 @@
     <head>
     	<title>Chat Demo</title>
     	<link type="text/css" rel="stylesheet" href="client_style.css"/>
-    	<link type="text/css" rel="stylesheet" href="javascript.css"/>
+      <script src="https://use.fontawesome.com/bb1de359ad.js"></script>
     </head>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>	
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
 		var socket = io();
 		var el = document.getElementById('server-time');
-		
+
 		socket.on('time',function(timeString){
 			el.innerHTML = 'Server time: ' +timeString;
 		});
-		
+
 		var errorMsg;
 		var name;
 		var age;
 		var gender;
 		var login = '<div id="error-container" ></div><div style="text-align:center"><ul style="list-style-type: none;" ><li><input id="name" type="text" name="name" value="" placeholder="Enter your Name!" ></li><li><input id="age" type="text" name="age" value="" placeholder="Enter your Age!" ></li><li><input id="gender" type="text" name="gender" value="" placeholder="Enter your Gender!" ></li></ul><button type="button" name="button" onclick="setUser()">Start chating!</button></div>'
-		
-		
-        function setUser(){	// set username event listener 
+
+
+        function setUser(){	// set username event listener
 			name = document.getElementById('name').value;
 			age = document.getElementById('age').value;
 			gender = document.getElementById('gender').value;
             socket.emit('setUser', {name:name , age:age, gender:gender}); //send user name to server
         };
 		function disconnect(){
-			socket.emit('leftRoom', {name: name, room: room});	
-			reset();			
+			socket.emit('leftRoom', {name: name, room: room});
+			reset();
 		}
         var user;
 		var room;
         socket.on('userExists', function(data){// if server says user name exists
 			errorMsg = 'Error: ' + data;
-            document.getElementById('error-container').innerHTML = errorMsg;		
+            document.getElementById('error-container').innerHTML = errorMsg;
         });
         socket.on('userSet', function(data){
             //user = data.username; /*set user to data.user name*/
             name = data.name; /*set user to data.user name*/
 			room = data.room;
-			
+
             document.body.innerHTML = '<input type="text" id="message">\
-            <button id="sendButton" type="button" name="button" onclick="sendMessage()">Send</button><button type="button" name="disconnect" onclick="disconnect()">Disconnect</button>\
+            <button type="button" name="button" onclick="sendMessage()">Send</button><button type="button" name="disconnect" onclick="disconnect()">Disconnect</button>\
             <div id="message-container"></div>';	// replace with input tag
 			document.getElementById('message-container').innerHTML += '<div> Your room is ' + room + '</div>';
 			/*
@@ -64,12 +64,12 @@
         }
 		function sendJoinedMessage(){
 			var msg = 'joined';
-			socket.emit('msg', {message: msg, name: name, room: room});	
+			socket.emit('msg', {message: msg, name: name, room: room});
 		}
         socket.on('newmsg', function(data){
 			if(data.message === "disconnected"){
 				document.getElementById('message-container').innerHTML += '<div><b>' + data.name + '</b>: ' + data.message + '</div>';
-				
+
 			}
             else if(name){
 				// add new line for new message
@@ -80,23 +80,37 @@
 			document.body.innerHTML = login;
 		}
     </script>
-    
-    <body>
-    <div class="logo">
-  		<img src="TheLemonLaw.png"/>
+
+<body>
+
+  <div class="home">
+    <h2><a href="main_page.html"><i class="fa fa-home" ></i></a></h2>
+  </div>
+
+  <div class="logo">
+  		<a href="about.html"><img src="TheLemonLaw.png"/></a>
 	</div>
 
-        <div id="error-container" ></div>
-		<div style="text-align:center">
-		<ul style="list-style-type: none;" >
-			<li><input  class="usernameInput" id="name" type="text" name="name" value="" maxlength="14" placeholder="Enter your Name!" ></li>
-			<li><input class="ageInput" id="age" type="text" name="age" value="" maxlength="2" placeholder="Age" ></li>
-			<li><input  class="usernameInput" id="gender" type="text" name="gender" value="" maxlength="6" placeholder="Enter your Gender!" ></li>
-		</ul>
-        <button  class="myButton" type="button" name="button" onclick="setUser()">Start chatting!</button>
+
+		<div class="username">
+    <label for="name">Username</label>
+		<input  class="usernameInput" id="name" type="text" name="name" value="" minlength="5" maxlength="14" placeholder="5 to 14 Characters" onfocus="this.placeholder=''" onblur="this.placeholder ='5 to 14 Characters'" >
+    </div>
+
+		<div class="age">
+    <label for="age">Age</label>
+    <input class="ageInput" id="age" type="text" name="age" value="" maxlength="3" placeholder="Age" onfocus="this.placeholder=''" onblur="this.placeholder ='Age'">
+    </div>
+
+    <div class="gender">
+    <label for="gender">Gender</label>
+    <input  class="usernameInput" id="gender" type="text" name="gender" value="" minlengh="4" maxlength="6" placeholder="Male or Female" onfocus="this.placeholder=''" onblur="this.placeholder ='Male or Female'" >
+    </div>
+
+    <div class="login">
+        <button  class="myButton" id="tv" type="button" name="button" onclick="setUser()">Log In</button>
 		</div>
 		<script type="text/javascript" src="/public/chat.js"></script>
-		
 
-    </body>
+</body>
 </html>
