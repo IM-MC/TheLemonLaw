@@ -1,5 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Alegreya+Sans';
 @import url('https://fonts.googleapis.com/css?family=VT323');
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
 
 /*over all styling of the html file*/
 html {
@@ -15,30 +16,19 @@ body{
 ul{
   list-style-type: none;
   margin: auto;
-
 }
 
-section{
-  height: 100%;
-  width: 100%;
-}
-
-.title{
-  cursor: default;
-  position: relative;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding-top: 15%;
-  padding-bottom: 25%;
-  width: 500px;
-  height: 100px;
+ul li{
+  font-size: 140%;
   color: white;
-  font-size: 250%;
-  text-align: center;
+  text-align: left;
+  letter-spacing: 1px;
   font-family: 'VT323', monospace;
+}
+
+ul li i{
+  margin:0 6% 7% 0;
+	padding:0 0 0 0;
 }
 
 .home{
@@ -61,111 +51,85 @@ section{
   color: #4CAF50;
 }
 
-#matthew{
-  margin: auto;
-  background-color: #A8CD1B;
-  min-height: 95vh;
-  width: 90%;
-  margin-top: 100px;
-}
+
 
 .mh{
-  position: absolute;;
-  margin: auto;
-  font-size: 250%;
-  top: 155%;
-  right: 0;
-  bottom: 0;
-  left: 6%;
-  width: 400px;
-  height: 300px;
+  text-decoration:underline;
   color: white;
-  font-family: 'VT323', monospace;
-}
-
-.mp{
-  background-color: #CBE32D;
-  position: absolute;;
-  margin: auto;
-  font-size: 250%;
-  top: 220%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 80%;
-  height: 70%;
-
-}
-
-#peter{
-  margin: auto;
-  background-color: #A8CD1B;
-  min-height: 95vh;
-  width: 90%;
-  margin-top: 100px;
+  font-size: 450%;
+  text-align: center;
+  font-family: 'Bungee Inline', cursive;
+  -webkit-transition-duration: 1.5s;
+  transition-duration: 1.5s;
 }
 
 .ph{
-  position: absolute;;
-  margin: auto;
-  font-size: 250%;
-  top: 372%;
-  right: 0;
-  bottom: 0;
-  left: 12%;
-  width: 400px;
-  height: 300px;
+  text-decoration:underline;
   color: white;
-  font-family: 'VT323', monospace;
-}
-
-.pp{
-  background-color: #CBE32D;
-  position: absolute;;
-  margin: auto;
-  font-size: 250%;
-  top: 438%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 80%;
-  height: 70%;
-
-}
-
-#alvin{
-  margin: auto;
-  background-color: #A8CD1B;
-  min-height: 95vh;
-  width: 90%;
-  margin-top: 100px;
-  margin-bottom: 70px;
+  font-size: 450%;
+  text-align: center;
+  font-family: 'Bungee Inline', cursive;
+  -webkit-transition-duration: 1.5s;
+  transition-duration: 1.5s;
 }
 
 .ah{
-  position: absolute;;
-  margin: auto;
-  font-size: 250%;
-  top: 590%;
-  right: 0;
-  bottom: 0;
-  left: 9%;
-  width: 400px;
-  height: 300px;
+  text-decoration:underline;
   color: white;
-  font-family: 'VT323', monospace;
+  font-size: 450%;
+  text-align: center;
+  font-family: 'Bungee Inline', cursive;
+  -webkit-transition-duration: 1.5s;
+  transition-duration: 1.5s;
 }
 
-.ap{
-  background-color: #CBE32D;
-  position: absolute;;
-  margin: auto;
-  font-size: 250%;
-  top: 657%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 80%;
-  height: 70%;
+.mh:hover{
+  color: #6ad0ff;
+}
 
+.ph:hover{
+  color: #000000;
+}
+
+.ah:hover{
+  color: #6ad0ff;
+}
+
+section{
+  height: 100%;
+  width: 100%;
+}
+
+
+.matthew{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 65%;
+  bottom: 5%;
+  left: 0;
+  width: 400px;
+  height: 400px;
+}
+
+.peter{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 5%;
+  left: 0;
+  width: 400px;
+  height: 400px;
+}
+
+.alvin{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 5%;
+  left: 65%;
+  width: 400px;
+  height: 400px;
 }
