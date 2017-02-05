@@ -37,8 +37,8 @@
 			gender = document.getElementById('gender').value;
             socket.emit('setUser', {name:name , age:age, gender:gender,room:0}); //send user name to server
         };
-		function disconnect(){
-			socket.emit('leftRoom', {name: name, room: room });
+		function disconnect(data){
+			socket.emit('leftRoom', {name: name, room: room ,index:data});
 			reset();
 		}
 
@@ -77,8 +77,8 @@
 				document.getElementById('message-container').innerHTML += '<div><b>' + data.name + '</b>: ' + data.message + '</div>';
         })
 
-		socket.on('quit',function(){
-			disconnect();
+		socket.on('quit',function(data){
+			disconnect(data);
 		});
 		function reset(){
 		//	document.body.innerHTML = login;

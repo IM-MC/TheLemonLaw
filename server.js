@@ -118,9 +118,9 @@ io.on('connection', function(socket){
 				console.log(users);
 			
 				timer = setTimeout(function(){
-					client[temp].emit('quit','');
+					client[temp].emit('quit',temp);
 					temp = index[1];
-					client[temp].emit('quit','');
+					client[temp].emit('quit',users.length-1);
 							
 				}, 10000); // 10 sec
 				
@@ -174,7 +174,7 @@ io.on('connection', function(socket){
 		io.sockets.in("room-"+data.room).emit('newmsg', {message: "disconnected" , name : data.name});
 		
 				// delete user
-		users.splice(index,1);
+		users.splice(data.index,1);
 		socket.leave("room-"+data.room);
 		
 
