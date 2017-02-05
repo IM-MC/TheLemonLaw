@@ -22,6 +22,10 @@ ul{
 
 }
 
+p{
+	padding-top: 30%;
+}
+
 .title{
   cursor: default;
   position: relative;
@@ -31,9 +35,9 @@ ul{
   bottom: 0;
   left: 0;
   padding-top: 15%;
-  padding-bottom: 25%;
+  padding-bottom: 30%;
   width: 500px;
-  height: 100px;
+  height: 200px;
   color: white;
   font-size: 250%;
   text-align: center;
@@ -69,17 +73,30 @@ section{
 }
 
 .p{
+	text-align: center;
+	vertical-align: middle;
 	font-family: 'VT323', monospace;
   background-color: #A8CD1B;
   position: absolute;;
   margin: auto;
   font-size: 250%;
-  top: 220%;
+  top: 250%;
   right: 0;
   bottom: 0;
   left: 0;
   width: 95%;
   min-height: 110vh;
-padding-left: 5%;
+  padding-left: 5%;
 
+}
+
+.logo{
+	position: absolute;;
+  margin: auto;
+  top: 355%;
+  bottom: 0;
+  right: 26%;
+  left: 0;
+  width: 14%;
+  height: 12%;
 }
