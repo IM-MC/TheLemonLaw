@@ -100,7 +100,7 @@ io.on('connection', function(socket){
 		
 			//If room is full start timer
 			
-			if (io.nsps['/'].adapter.rooms["room-"+roomNum].length > 1 ){ //if length is 2
+			if (io.nsps['/'].adapter.rooms["room-"+roomNum].length == 2 ){ //if length is 2
 				
 				var index=[];
 				var temp = 0;
