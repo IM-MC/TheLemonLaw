@@ -47,10 +47,10 @@ io.on('connection', function(socket){
 			}
 			// chooose base on age
 			if  (data.age < 18 ){
-				roomNum = Math.floor((Math.random() * 3)+1);
+				roomNum = Math.floor((Math.random() * 2)+1);
 			}
 			else {
-				roomNum = Math.floor((Math.random() * 10)+4);
+				roomNum = Math.floor((Math.random() * 2)+4);
 			}
 			
 			// join room after user name is set
@@ -65,10 +65,10 @@ io.on('connection', function(socket){
 				
 				// chooose base on age
 				if  (data.age < 18 ){
-					roomNum = Math.floor((Math.random() * 3)+1);
+					roomNum = Math.floor((Math.random() * 2)+1);
 				}
 				else {
-					roomNum = Math.floor((Math.random() * 10)+4);
+					roomNum = Math.floor((Math.random() * 2)+4);
 				}
 			}
 				
