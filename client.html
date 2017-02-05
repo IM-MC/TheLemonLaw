@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head><title>Chat Demo</title></head>
+    <head>
+    	<title>Chat Demo</title>
+    	<link type="text/css" rel="stylesheet" href="client_style.css"/>
+    </head>
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>	
 
+    <div id = chatform>
     <script>
 		var socket = io();
 		var el = document.getElementById('server-time');
@@ -77,6 +81,7 @@
 		}
 
     </script>
+    </div>
     <body>
         <div id="error-container" ></div>
 		<div style="text-align:center">
