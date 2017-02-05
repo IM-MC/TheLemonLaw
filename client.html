@@ -26,6 +26,10 @@
 
         function setUser(){	// set username event listener
 			name = document.getElementById('name').value;
+			if(name.length < 3){
+				alert("Please enter a valid name!");
+				return;
+			}
 			age = document.getElementById('age').value;
 			gender = document.getElementById('gender').value;
             socket.emit('setUser', {name:name , age:age, gender:gender}); //send user name to server
