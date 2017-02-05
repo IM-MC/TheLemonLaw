@@ -1,16 +1,15 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var PORT = process.env.PORT || 8080;
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname+'/main_page.html');
+
+app.get('/',function(req,res){
+	res.sendFile(__dirname + '/client.html');
 });
 users = [];
 
 var roomNum = Math.round((Math.random() * 10));
-
-io.set('transports', ['xhr-polling']);
-io.set('polling duration', 10);
 
 io.on('connection', function(socket){
 	console.log('A user connected');
@@ -55,6 +54,6 @@ io.on('connection', function(socket){
 });
 
 
-http.listen(3000, function(){
-  console.log('listening on localhost:3000');
+http.listen(PORT,function(){
+	console.log('Listening on port: ',PORT);
 });
