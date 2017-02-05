@@ -3,6 +3,7 @@
     <head>
     	<title>Chat Demo</title>
     	<link type="text/css" rel="stylesheet" href="client_style.css"/>
+    	<link type="text/css" rel="stylesheet" href="javascript.css"/>
     </head>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -44,7 +45,7 @@
 			room = data.room;
 			
             document.body.innerHTML = '<input type="text" id="message">\
-            <button type="button" name="button" onclick="sendMessage()">Send</button><button type="button" name="disconnect" onclick="disconnect()">Disconnect</button>\
+            <button id="sendButton" type="button" name="button" onclick="sendMessage()">Send</button><button type="button" name="disconnect" onclick="disconnect()">Disconnect</button>\
             <div id="message-container"></div>';	// replace with input tag
 			document.getElementById('message-container').innerHTML += '<div> Your room is ' + room + '</div>';
 			/*
