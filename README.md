@@ -15,5 +15,4 @@ thelemonlaw.herokuapp.com
 
 Notes:
 Don't worry if it takes a while to load the page, since it's hosted on Heroku, Heroku needs to 'wake-up' at initial start up after a certain time period has passed with no activity.
-The kick period has been shortened down to ~10 seconds to allow for demoing at the hackathon.
 You can open multiple tabs and load TheLemonLaw so you can try out the chat platform without using another computer.
