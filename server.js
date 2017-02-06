@@ -122,7 +122,7 @@ io.on('connection', function(socket){
 					temp = index[1];
 					client[temp].emit('quit',users.length-1);
 							
-				}, 10000); // 10 sec
+				}, 300000); // 10 sec
 				
 
 
