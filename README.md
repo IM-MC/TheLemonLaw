@@ -9,3 +9,11 @@ People who use this application are automatically placed into chat rooms of maxi
 5 minutes to talk to each other and decide whether or not they would like to exchange contact information with the other person. After 5 minutes
 is up, they are both kicked out of the room and can re-enter the application to meet someone new. 
 
+
+Try it out here! 
+thelemonlaw.herokuapp.com
+
+Notes:
+Don't worry if it takes a while to load the page, since it's hosted on Heroku, Heroku needs to 'wake-up' at initial start up after a certain time period has passed with no activity.
+The kick period has been shortened down to ~10 seconds to allow for demoing at the hackathon.
+You can open multiple tabs and load TheLemonLaw so you can try out the chat platform without using another computer.
