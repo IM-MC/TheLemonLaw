@@ -5,8 +5,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var PORT = process.env.PORT || 8080;
 
-users = [];
-client = [];
+users = {};
+client = {};
 var timer;
 var roomNum ;
 
@@ -21,167 +21,101 @@ app.get('/create', function(req,res){
 	res.redirect('/client.html');
 });
 
-
 io.on('connection', function(socket){
-	/*
+
 	socket.on('disconnect',function(){
-		if (users.length == client.length)
-			users.splice(client.indexOf(socket),1);
-		client.splice(client.indexOf(socket),1);
+		
 	});
-	*/
-	console.log('A user connected');
-	socket.on('setUser', function(data){	// Data is name; setUsername is event name (function called name)
-		//console.log(data.name);
+	socket.on('setUser', function(data){
 		if(users.indexOf(data.name) > -1){	// if cant find user entered name
 			socket.emit('userExists', data.name + ' username is taken! Try some other username.');
 		}
 		else{
-			//choose base on gender
-			
-			if (data.gender == "Male"){
-				roomNum = Math.floor((Math.random() * 5) + 1);
-			}
-			else if(data.gender == "Female"){
-				roomNum = Math.floor((Math.random() * 5)+1)*2;
-			}
 			// chooose base on age
 			if  (data.age < 18 ){
-				roomNum = Math.floor((Math.random() * 2)+1);
-			}
-			else {
-				roomNum = Math.floor((Math.random() * 2)+4);
-			}
-			
-			// join room after user name is set
-			while (io.nsps['/'].adapter.rooms["room-"+roomNum] && io.nsps['/'].adapter.rooms["room-"+roomNum].length > 1){
-								// choose base on gender
-				if (data.gender == "Male"){
-					roomNum = Math.floor((Math.random() * 5) + 1);
-				}
-				else if(data.gender == "Female"){
-					roomNum = Math.floor((Math.random() * 5)+1)*2;
-				}
-				
-				// chooose base on age
-				if  (data.age < 18 ){
-					roomNum = Math.floor((Math.random() * 2)+1);
-				}
-				else {
-					roomNum = Math.floor((Math.random() * 2)+4);
-				}
-			}
-				
-			/*
-			if (io.nsps['/'].adapter.rooms["room-"+roomNum] && io.nsps['/'].adapter.rooms["room-"+roomNum].length > 1){
-				// choose base on gender
-				if (data.gender == "Male"){
-					roomNum = Math.floor((Math.random() * 10) + 1);
-				}
-				else if(data.gender == "Female"){
-					roomNum = Math.floor((Math.random() * 5)+1)*2;
-				}
-				
-				// chooose base on age
-				if  (data.age < 18 ){
+				if(data.gender == "Male") {
 					roomNum = Math.floor((Math.random() * 3)+1);
 				}
-				else {
-					roomNum = Math.floor((Math.random() * 10)+4);
+				else{
+					roomNum = 2;
 				}
 			}
-			*/
+			else {
+				if (data.gender == "Male"){
+					roomNum = Math.floor((Math.random() * 10) + 4);
+				}
+				else if(data.gender == "Female"){
+					roomNum = Math.floor((Math.random() * 5)+2)*2;
+				}
+			}
+			while (io.nsps['/'].adapter.rooms["room-"+roomNum] && io.nsps['/'].adapter.rooms["room-"+roomNum].length == 2){
+				if  (data.age < 18 ){
+					if(data.gender == "Male") {
+						roomNum = Math.floor((Math.random() * 2))+1;
+					}
+					else{
+						roomNum = 2;
+					}
+				}
+				else {
+					if (data.gender == "Male"){
+						roomNum = Math.floor((Math.random() * 10) + 4);
+					}
+					else if(data.gender == "Female"){
+						roomNum = Math.floor((Math.random() * 5)+2)*2;
+					}
+				}
+			}
 			data.room = roomNum; 
 			socket.join("room-"+roomNum);
 			users.push(data);	// push to Array
 			client.push(socket);
 			
-			console.log(data.name + ' ' + data.room);
-		
-			//If room is full start timer
+			socket.emit('userSet', users[users.length-1]);	// send message to room
 			
-			if (io.nsps['/'].adapter.rooms["room-"+roomNum].length == 2 ){ //if length is 2
-				
-				var index=[];
-				var temp = 0;
-				
-				for (i=0;i<users.length;i++){ // loop through users
-					if(users[i].room == roomNum){
-						
-						index[temp] = i;
-						temp++;
-							
-					}
-				
-				}
-				temp = index[0];
-				console.log(users);
-			
+			if (io.nsps['/'].adapter.rooms["room-"+roomNum].length == 2 ){
+				console.log("Timer started");
 				timer = setTimeout(function(){
-					client[temp].emit('quit',temp);
-					temp = index[1];
-					client[temp].emit('quit',users.length-1);
+					for (var i in client){
+						if (users[i].room == roomNum){
+							//console.log(users[i]);
+							client[i].emit('quit' , users[i] );
 							
-				}, 300000); // 10 sec
-				
-
-
+						}
+					}
+				},30000)	// wait 6 seconds
 			}
 			
-			//socket.emit('userSet', {username: data});	// username = descrpition
-			socket.emit('userSet', {name: data.name ,age:data.age , gender:data.gender, room: roomNum});	// username = descrpition
 			
-			
-			//io.sockets.in("room-"+roomNum).emit('connectToRoom', "You are in room no. "+roomNum);
 		}
-	});
-	/*
-	var x = 0;
-	var y;
-	socket.on('kick',function(data){
-		//clearTimeout(timer);
 		
-		
-				
-		for (i=0;i<users.length;i++){ // loop through users
-			if(users[i].room == data.room){
-				//check if same person
-				if (users[i].name != data.name){
-					x = i;
-					y = data.room;
-				}
-					
-			}
-		
-		}
-		client[x].emit('kicked','');
 		
 	});
-	socket.on('forceLeave',function(data){
-		io.sockets.in("room-"+data.room).emit('newmsg', {message: "kicked" , name : data.name});
-		client[x].leave("room-"+y);
-		users.splice(x,1);
-	});
-	*/
+	
 	socket.on('msg', function(data){
-      //Send message to everyone
+      //Send message to everyone in room
       io.sockets.in("room-"+data.room).emit('newmsg', data);
-	})
+	  console.log(users);
+	});
 	
 	socket.on('leftRoom',function(data){
-		var index = users.indexOf(data.name) ;
-		console.log(data.name + 'disconnected from room ' + data.room);
-		io.sockets.in("room-"+data.room).emit('newmsg', {message: "disconnected" , name : data.name});
 		
-				// delete user
-		users.splice(data.index,1);
+		var index;
+		clearTimeout(timer);
+		
+		//console.log(data.name + ' disconnected from room ' + data.room + ' index: ' + index);
+		io.sockets.in("room-"+data.room).emit('newmsg', {message: " disconnected" , name : data.name});
+		
+		// delete user
+		index = users.indexOf(data.name);
+		users.splice(index,1);
+		client.splice(index,1);
+		//console.log(users);
 		socket.leave("room-"+data.room);
-		
 
 	});
 
 });
-
 
 http.listen(PORT,function(){
 	console.log('Listening on port: ',PORT);

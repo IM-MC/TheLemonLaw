@@ -38,7 +38,7 @@
             socket.emit('setUser', {name:name , age:age, gender:gender,room:0}); //send user name to server
         };
 		function disconnect(data){
-			socket.emit('leftRoom', {name: name, room: room ,index:data});
+			socket.emit('leftRoom', data);
 			reset();
 		}
 
@@ -50,9 +50,9 @@
             //user = data.username; /*set user to data.user name*/
             name = data.name; /*set user to data.user name*/
 			room = data.room;
-			state = 2
+			state = 2;
             document.body.innerHTML = '<input type="text" id="message">\
-            <div id="send"><button id="buttonSend" type="button" name="button" onclick="sendMessage()">Send</button></div> <div id="disconnect"><button id="buttonDisconnect" type="button" name="disconnect" onclick="disconnect()">Disconnect</button></div>\
+            <div id="send"><button id="buttonSend" type="button" name="button" onclick="sendMessage()">Send</button></div> <div id="disconnect"><button id="buttonDisconnect" type="button" name="disconnect" onclick="disconnect({name:name , age:age, gender:gender,room:room})">Disconnect</button></div>\
             <div id="message-container"></div> <div class="logo"><a href="about.html"><img src="TheLemonLaw.png"/></a></div>';	// replace with input tag
 			document.getElementById('message-container').innerHTML += '<div> Your room is ' + room + '</div>';
 			/*
@@ -75,11 +75,12 @@
 		}
         socket.on('newmsg', function(data){
 				document.getElementById('message-container').innerHTML += '<div><b>' + data.name + '</b>: ' + data.message + '</div>';
+				autoScroll();
         })
-
 		socket.on('quit',function(data){
 			disconnect(data);
 		});
+
 		function reset(){
 		//	document.body.innerHTML = login;
 		//	state = 1;
@@ -91,9 +92,14 @@
 			if (key==13){
 				if (state == 1)
 					setUser();
-				else (state == 2)
+				else if(state == 2)
 					sendMessage();
 			}
+		}
+		
+		// auto scroll
+		function autoScroll(){
+			document.getElementById('message-container').scrollToBottom();
 		}
 		/*
 		socket.on('kicked',function(data){
