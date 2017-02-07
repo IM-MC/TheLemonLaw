@@ -39,7 +39,6 @@
         };
 		function disconnect(data){
 			socket.emit('leftRoom', data);
-			reset();
 		}
 
         socket.on('userExists', function(data){// if server says user name exists
@@ -77,8 +76,11 @@
 				document.getElementById('message-container').innerHTML += '<div><b>' + data.name + '</b>: ' + data.message + '</div>';
 				autoScroll();
         })
-		socket.on('quit',function(data){
-			disconnect(data);
+		socket.on('timer',function(data){
+			socket.emit('timeout',data);	
+		});
+		socket.on('reset',function(){
+			reset();
 		});
 
 		function reset(){
@@ -99,7 +101,8 @@
 		
 		// auto scroll
 		function autoScroll(){
-			document.getElementById('message-container').scrollToBottom();
+			var ele = document.getElementById('message-container');
+			ele.scrollTop = ele.scrollHeight;
 		}
 		/*
 		socket.on('kicked',function(data){

@@ -5,8 +5,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var PORT = process.env.PORT || 8080;
 
-users = {};
-client = {};
+users = [];
+client = [];
 var timer;
 var roomNum ;
 
@@ -75,15 +75,14 @@ io.on('connection', function(socket){
 			
 			if (io.nsps['/'].adapter.rooms["room-"+roomNum].length == 2 ){
 				console.log("Timer started");
-				timer = setTimeout(function(){
-					for (var i in client){
-						if (users[i].room == roomNum){
-							//console.log(users[i]);
-							client[i].emit('quit' , users[i] );
-							
-						}
+				for (var i in client){
+					if (users[i].room == roomNum){
+						//console.log(users[i]);
+						client[i].emit('timer' , users[i] );
+						
 					}
-				},30000)	// wait 6 seconds
+				}
+
 			}
 			
 			
@@ -101,7 +100,15 @@ io.on('connection', function(socket){
 	socket.on('leftRoom',function(data){
 		
 		var index;
-		clearTimeout(timer);
+		for (var i in client){
+			if (users[i].room == data.room){
+				//console.log(users[i]);
+				//client[i].emit('timer' , users[i] );
+				clearTimeout(client[i].timer);
+				
+			}
+		}
+		//clearTimeout(timer);
 		
 		//console.log(data.name + ' disconnected from room ' + data.room + ' index: ' + index);
 		io.sockets.in("room-"+data.room).emit('newmsg', {message: " disconnected" , name : data.name});
@@ -111,8 +118,24 @@ io.on('connection', function(socket){
 		users.splice(index,1);
 		client.splice(index,1);
 		//console.log(users);
+		socket.emit('reset','');
 		socket.leave("room-"+data.room);
+		
 
+
+	});
+	socket.on('timeout',function(data){
+		var index;
+		//io.sockets.in("room-"+data.room).emit('newmsg', {message: " disconnected" , name : data.name});
+		// delete user after timer ended
+		timer = setTimeout(function(){
+			index = users.indexOf(data.name);
+			users.splice(index,1);
+			client.splice(index,1);
+			//console.log(users);
+			socket.emit('reset','');
+			socket.leave("room-"+data.room);
+		},7000)	// wait 7 seconds
 	});
 
 });
